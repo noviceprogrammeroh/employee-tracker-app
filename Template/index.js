@@ -3,6 +3,13 @@ const logo = require("asciiart-logo");
 const db = require("./db");
 require("console.table");
 
+
+//access models
+const Deparment = require("./models/Department.js");
+const Employee = require("./models/Employee.js");
+const Role = require("./models/Role.js");
+
+
 init();
 
 // Display logo text, load main prompts
@@ -12,6 +19,9 @@ function init() {
   console.log(logoText);
 
   // loadPrompts();
+
+
+  
 }
 
 // Exit the application
