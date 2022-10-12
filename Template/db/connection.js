@@ -13,4 +13,11 @@ connection.connect(function (err) {
   if (err) throw err;
 });
 
+function getDepartments() {
+    connection.query('SELECT* FROM departments', function(error, results) {
+        if(error) throw error;
+        console.log("results:", results)
+    })
+};
+
 module.exports = connection;
