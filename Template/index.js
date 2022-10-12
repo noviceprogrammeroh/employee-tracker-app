@@ -4,7 +4,7 @@ const db = require("./db");
 require("console.table");
 
 //access models
-const Deparment = require("./models/Department.js");
+const Department = require("./models/Department.js");
 const Employee = require("./models/Employee.js");
 const Role = require("./models/Role.js");
 
