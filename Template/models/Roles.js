@@ -1,5 +1,5 @@
 
-class Role {
+class Roles {
 
     constructor(id, title, salary, department_id) {
         this.id = id;
@@ -26,3 +26,5 @@ class Role {
     }
 
 }
+
+module.exports = Roles;
