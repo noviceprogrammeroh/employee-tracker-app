@@ -12,6 +12,7 @@ const Employee = require("./models/Employee.js");
 const Roles = require("./models/Roles.js");
 // const Connection = require("mysql2/typings/mysql/lib/Connection.js");
 
+require('dotenv').config()
 init();
 
 // Display logo text, load main prompts
