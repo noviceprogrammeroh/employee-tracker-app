@@ -2,20 +2,18 @@ const inquirer = require("inquirer");
 const logo = require("asciiart-logo");
 // const db = require("./db");
 require("console.table");
-// const db = require("../Template/db/connection.js");
-const getDepartments = require("../Template/db/connection.js");
+
 const db = require("../Template/db/connection.js");
 
 //access models
 const Department = require("./models/Department.js");
 const Employee = require("./models/Employee.js");
 const Roles = require("./models/Roles.js");
-// const Connection = require("mysql2/typings/mysql/lib/Connection.js");
 
-require('dotenv').config()
-init();
+// require('dotenv').config()
 
-// Display logo text, load main prompts
+
+//Display logo text, load main prompts
 function init() {
   const logoText = logo({ name: "Employee Manager" }).render();
 
@@ -26,13 +24,15 @@ function init() {
   // loadPrompts();
 }
 
-function startProgram() {
-  inquirer
+//
+
+function startProgram() { 
+    inquirer
     .prompt([
       {
         type: "list",
         name: "viewList",
-        message: "What would you like to do?",
+        message: "Please choose from the options below:",
         choices: [
           "View all departments",
           "View all roles",
@@ -47,14 +47,16 @@ function startProgram() {
           "Remove a department",
           "Remove a role",
           "Remove an employee",
-          "Exit",
+          "exit",
         ],
       },
     ])
-    .then((answers) => {
+    .then(answers => {
+      console.log(answers)
       const answer = answers.viewList;
       if (answer === "View all departments") {
         viewAlldDeparments()
+
       }
 
       if (answer === "View all roles") {
@@ -80,8 +82,23 @@ function startProgram() {
       if (answer === "Update an employee role" ) {      
         updateEmployeeRole();
      }
+     if(answer === "Update an employee's manager") {
+        updateManager();
+     }
 
+     if(answer === "Update an employee's manager") {
+        updateManager();
+     }
 
+     if(answer === "View employees by department") {
+        viewEmployeeDpt();
+
+     }
+
+     if(answer === "Remove an employee") {
+        removeEmployee();
+     }
+     
       if (answer === "exit") {
         quit();
       }
@@ -98,6 +115,7 @@ const viewAlldDeparments = () => {
     console.log("\n");
     console.table(results);
     startProgram();
+
   });
 };
 
@@ -113,8 +131,9 @@ const viewAllRoles = () => {
     }
     console.log("\n");
     console.table(results);
+      startProgram();
   });
-  // startProgram();
+
 };
 
 const viewAllEmployees = () => {
@@ -130,7 +149,7 @@ const viewAllEmployees = () => {
     }
     console.log("\n");
     console.table(results);
-    startProgram();
+    // startProgram();
   });
 
 };
@@ -163,6 +182,8 @@ const addDepartment = () => {
         }
         console.log("Department added!");
         viewAlldDeparments();
+        startProgram();
+        quit();
       });
     });
 };
@@ -297,135 +318,17 @@ const addEmployee = () => {
           }
           console.log("Employee added!");
           viewAllEmployees();
-          startProgram();
+        //   startProgram();
         });
       });
   };
 
 
-// UPDATE Customers
-// SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
-// WHERE CustomerID = 1;
-  //update Employee Role
-//   const updateEmployeeRole = () => {
-//     return inquirer
-//       .prompt([
-//         {
-//           type: "input",
-//           name: "firstName",
-//           message: "Enter employee first name?",
-//           validate: (firstNameInput) => {
-//             if (firstNameInput) {
-//               return true;
-//             } else {
-//               console.log("Enter employee first name");
-//               return false;
-//             }
-//           },
-//         }, 
-
-//         {
-//             type: "input",
-//             name: "lastName",
-//             message: "Enter employee last name?",
-//             validate: (lastNameInput) => {
-//               if (lastNameInput) {
-//                 return true;
-//               } else {
-//                 console.log("Enter employee last name");
-//                 return false;
-//               }
-//             },
-//           }, 
-
-//           {
-//             type: "input",
-//             name: "roleID",
-//             message: "Enter employee role ID?",
-//             validate: (roleIdInput) => {
-//               if (roleIdInput) {
-//                 return true;
-//               } else {
-//                 console.log("Enter employee last name");
-//                 return false;
-//               }
-//             },
-//           }, 
-
-//           {
-//             type: "input",
-//             name: "managerId",
-//             message: "Enter manager ID: ",
-//             validate: managerIdInput => {
-//               if (managerIdInput) {
-//                 return true;
-//               } else {
-//                 console.log("Enter manager ID");
-//                 return false;
-//               }
-//             },
-//           }, 
-//         {
-//             type: "input",
-//             name: "title",
-//             message: "Enter employee new role: ",
-//             validate: (titleInput) => {
-//               if (titleInput) {
-//                 return true;
-//               } else {
-//                 console.log("Enter new role");
-//                 return false;
-//               }
-//             },
-//           },
-
-//           {
-//             type: "input",
-//             name: "salary",
-//             message: "Enter new salary: ",
-//             validate: (titleInput) => {
-//               if (titleInput) {
-//                 return true;
-//               } else {
-//                 console.log("Enter new salary");
-//                 return false;
-//               }
-//             },
-//           },
-
-//           {
-//             type: "input",
-//             name: "department_id",
-//             message: "Enter department ID: ",
-//             validate: (titleInput) => {
-//               if (titleInput) {
-//                 return true;
-//               } else {
-//                 console.log("Enter department ID");
-//                 return false;
-//               }
-//             },
-//           },
-//       ])
-//       .then((answer) => {
-//         const sql = `UPDATE`;
-//         const params = [answer.title, answer.salary, answer.department_id];
-  
-//         db.query(sql, params, (err) => {
-//           if (err) {
-//             throw err;
-//           }
-//           console.log("Role added!");
-//           viewAllRoles();
-//         });
-//       });
-//   };
-
 const updateEmployeeRole = () => {
     // get employees from employee table 
-    const employeeSql = `SELECT * FROM employee`;
+    const sql = `SELECT * FROM employee`;
     // make the query to get all employees from employee table
-    db.query(employeeSql, (err, data) => {
+    db.query(sql, (err, data) => {
       if (err) throw err; 
         // from the employee table, find all id, first and last names then set name as firstname lastname, and value as the employees id
     const employees = data.map(({ id, first_name, last_name }) => ({ name: first_name + " "+ last_name, value: id }));
@@ -446,9 +349,9 @@ const updateEmployeeRole = () => {
         //  params: [] => [Hector Perez]
           params.push(employee);
             // new query to chose the new role for the chosen employee
-          const roleSql = `SELECT * FROM role`;
+          const sql = `SELECT * FROM role`;
             // make the query to get all roles from role table
-          db.query(roleSql, (err, data) => {
+          db.query(sql, (err, data) => {
             if (err) throw err; 
             // from the roles table we want to find all id and titles, then set name to role title, value to its id
             const roles = data.map(({ id, title }) => ({ name: title, value: id }));
@@ -481,7 +384,7 @@ const updateEmployeeRole = () => {
                     // tell user employees role has been updated
                   console.log("Employee has been updated!");
                 
-                  startProgram();
+                //   startProgram();
             });
           });
         });
@@ -490,8 +393,126 @@ const updateEmployeeRole = () => {
   };
 
 
-// Exit the application
+  //update manager
+
+ const updateManager = () => {
+    // get employees from employee table 
+    const sql = `SELECT * FROM employee`;
+  
+    db.query(sql, (err, data) => {
+      if (err) throw err; 
+  
+    const employees = data.map(({ id, first_name, last_name }) => ({ name: first_name + " "+ last_name, value: id }));
+  
+      inquirer.prompt([
+        {
+          type: 'list',
+          name: 'name',
+          message: "Which employee would you like to update?",
+          choices: employees
+        }
+      ])
+        .then(answer => {
+          const employee = answer.name;
+          const params = []; 
+          params.push(employee);
+  
+          const sql = `SELECT * FROM employee`;
+  
+            db.query(sql, (err, data) => {
+              if (err) throw err; 
+  
+            const managers = data.map(({ id, first_name, last_name }) => ({ name: first_name + " "+ last_name, value: id }));
+              
+                inquirer.prompt([
+                  {
+                    type: 'list',
+                    name: 'manager',
+                    message: "Who is the employee's manager?",
+                    choices: managers
+                  }
+                ])
+                    .then(answer => {
+                      const manager = answer.manager;
+                      params.push(manager); 
+                      
+                    //   let employee = params[0]
+                      params[0] = manager
+                      params[1] = employee 
+                      
+  
+                      // console.log(params)
+  
+                      const sql = `UPDATE employee SET manager_id = ? WHERE id = ?`;
+  
+                      db.query(sql, params, (err, result) => {
+                        if (err) throw err;
+                      console.log("Employee has been updated!");
+                    
+                      viewAllEmployees();
+            });
+          });
+        });
+      });
+    });
+  };
+
+  //function to view employee by department
+  const viewEmployeeDpt = () => {
+    console.log("");
+    console.log('Employee by Departments :\n');
+    const sql = `SELECT employee.first_name, 
+                        employee.last_name, 
+                        department.name AS department
+                 FROM employee 
+                 LEFT JOIN role ON employee.role_id = role.id 
+                 LEFT JOIN department ON role.department_id = department.id`;
+  
+    db.query(sql, (err, rows) => {
+      if (err) throw err; 
+      console.table(rows); 
+      startProgram();
+
+    });          
+  };
+
+// function to delete employees
+const removeEmployee = () => {
+    // get employees from employee table 
+    const sql = `SELECT * FROM employee`;
+  
+    db.query(sql, (err, data) => {
+      if (err) throw err; 
+  
+    const employees = data.map(({ id, first_name, last_name }) => ({ name: first_name + " "+ last_name, value: id }));
+  
+      inquirer.prompt([
+        {
+          type: 'list',
+          name: 'name',
+          message: "Which employee would you like to delete?",
+          choices: employees
+        }
+      ])
+        .then(answer => {
+          const employee = answer.name;
+  
+          const sql = `DELETE FROM employee WHERE id = ?`;
+  
+          db.query(sql, employee, (err, result) => {
+            if (err) throw err;
+            console.log("Successfully Deleted!");
+          
+            viewAllEmployees();
+      });
+    });
+   });
+  };
+
+
+//Exit the application
 function quit() {
   console.log("Goodbye!");
   process.exit();
 }
+init();
