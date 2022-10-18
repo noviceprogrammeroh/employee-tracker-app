@@ -13,9 +13,9 @@ The Note Taker application allows the user to write and saves notes.
 
 ## Sreenshots of the web page ##
 
-![This is an image](./Assets/mainmenu.JPG)
-![This is an image](./Assets/allroles.JPG)
-![This is an image](./Assets/remove.jpg)
+![This is an image](./images/mainmenu.png)
+![This is an image](./images/allroles.png)
+![This is an image](./images/remove.png)
 
 This application was built using node express and mysql. The application allows users to view all departments, roles and employees. Users can update employees' manager information, add an employee, add a role and delete an employee. 
 
