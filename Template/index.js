@@ -119,6 +119,7 @@ const viewAlldDeparments = () => {
   });
 };
 
+//view all roles
 const viewAllRoles = () => {
   const sql = `   
     SELECT role.id, role.title, role.salary, role.department_id AS department_id,
@@ -136,6 +137,7 @@ const viewAllRoles = () => {
 
 };
 
+//View all employees
 const viewAllEmployees = () => {
   const sql = `
    SELECT employee.id, employee.first_name, employee.last_name, role.title,
@@ -149,12 +151,12 @@ const viewAllEmployees = () => {
     }
     console.log("\n");
     console.table(results);
-    // startProgram();
+    startProgram();
   });
 
 };
 
-//function to add a department
+//Add a department
 const addDepartment = () => {
   return inquirer
     .prompt([
@@ -188,7 +190,7 @@ const addDepartment = () => {
     });
 };
 
-//create a function to add a role
+//Add a role
 //tHEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
 
 const addRole = () => {
@@ -323,6 +325,7 @@ const addEmployee = () => {
       });
   };
 
+  //update an employee role
 
 const updateEmployeeRole = () => {
     // get employees from employee table 
@@ -394,7 +397,6 @@ const updateEmployeeRole = () => {
 
 
   //update manager
-
  const updateManager = () => {
     // get employees from employee table 
     const sql = `SELECT * FROM employee`;
@@ -457,7 +459,7 @@ const updateEmployeeRole = () => {
     });
   };
 
-  //function to view employee by department
+  //view employee by department
   const viewEmployeeDpt = () => {
     console.log("");
     console.log('Employee by Departments :\n');
@@ -490,7 +492,7 @@ const removeEmployee = () => {
         {
           type: 'list',
           name: 'name',
-          message: "Which employee would you like to delete?",
+          message: "Enter employee's name that you would like to delete :",
           choices: employees
         }
       ])
@@ -501,7 +503,7 @@ const removeEmployee = () => {
   
           db.query(sql, employee, (err, result) => {
             if (err) throw err;
-            console.log("Successfully Deleted!");
+            console.log("Employee Deleted!");
           
             viewAllEmployees();
       });
