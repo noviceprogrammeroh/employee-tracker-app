@@ -31,3 +31,7 @@ This application was built using node express and mysql. The application allows 
 ## Video ##
 
 
+https://user-images.githubusercontent.com/66175531/196325953-37975068-e51d-475d-a5be-2fe98816b1e9.mp4
+
+
+
